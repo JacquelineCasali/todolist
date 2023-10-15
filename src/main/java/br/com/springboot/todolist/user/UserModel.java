@@ -21,8 +21,8 @@ public class UserModel {
  private UUID id;
  @Column(unique = true)
  private String username;
- private String  name;
- private String  password;
+ private String name;
+ private String password;
 
 
  // quando o dado for gerado
