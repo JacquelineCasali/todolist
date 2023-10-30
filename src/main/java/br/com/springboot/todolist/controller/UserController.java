@@ -1,8 +1,7 @@
 package br.com.springboot.todolist.controller;
 
-
+import br.com.springboot.todolist.user.IUserRepository;
 import br.com.springboot.todolist.user.UserModel;
-import br.com.springboot.todolist.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,40 +12,35 @@ import org.springframework.web.bind.annotation.RestController;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
-
+/**
+ * Modificador
+ * public
+ * private
+ * protected
+ */
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    
-/*String (texto)
-Integer (int)numeros interitos
-Double double Numeros 0.000
-Float Numeros 0.000
-char (A C)
-Date (data)
-void não tem retorno do metodo  */
 
-    //metodo de cadastro
-    // gerenciar
     @Autowired
-    private UserRepository userRepository;
-    @PostMapping
-    public ResponseEntity create(@RequestBody UserModel userModel){
-       // verificando se o usuario existe
-       var user= this.userRepository.findByUsername(userModel.getUsername());
+    private IUserRepository userRepository;
 
-       if (user != null){
+    @PostMapping("/")
+    public ResponseEntity create(@RequestBody UserModel userModel) {
+        var user = this.userRepository.findByUsername(userModel.getUsername());
 
-           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario ja existe");
+        if (user != null) {
+            // Mensagem de erro
+            // Status Code
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já existe");
         }
-       // criptografando senha
-        var passwordHashred = BCrypt.withDefaults().hashToString(12,userModel.getPassword().toCharArray());
-       userModel.setPassword(passwordHashred);
-       var userCreate = this.userRepository.save(userModel);
-        return ResponseEntity.status(HttpStatus.OK).body(userCreate);
 
+        var passwordHashred = BCrypt.withDefaults()
+                .hashToString(12, userModel.getPassword().toCharArray());
 
+        userModel.setPassword(passwordHashred);
+
+        var userCreated = this.userRepository.save(userModel);
+        return ResponseEntity.status(HttpStatus.OK).body(userCreated);
     }
-
-
 }
