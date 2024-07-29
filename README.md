@@ -3,17 +3,18 @@
 ## Descrição do projeto
 Este é o back-end de um lista de tarefas desenvolvido em Java e Spring Boot. O sistema permite que os usuários criem  lista de tarefas . 
 
-Esse projeto está com banco de dados em memoria
 
+Esse projeto é o desenvolvimento da API Rest com banco de dados em memoria .
 # Imagem do projeto
-https://ibb.co/bmMQz0p
+![Video_2024-07-28_120636](https://github.com/user-attachments/assets/8bebc6f8-d9da-4ee7-a848-6975cc06c09d)
 
-# Deploy do projeto 
-https://todolist-dy0q.onrender.com/users/
+
+# Deploy do projeto executar no postman ou no insomia 
+post: https://todolist-dy0q.onrender.com/users
 
 # Funcionalidades do projeto
 
-✔️ Autenticação de Usuários: Os usuários registrados podem fazer login na plataforma usando suas credenciais.
+- ✔️ Autenticação de Usuários: Os usuários registrados podem fazer login na plataforma usando suas credenciais.
 
 - ✔️ Criar uma tarefa`
 - ✔️ Listar tarefas`
