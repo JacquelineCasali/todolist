@@ -31,13 +31,14 @@ public class TaskModel {
     @GeneratedValue(generator = "UUID")
     private UUID id;
     private String descricao;
-
+//tamanho maximo
     @Column(length = 50)
     private String titulo;
     private LocalDateTime startAt;
     private LocalDateTime endAt;
     private String prioridade;
 
+    //asociar usuario com a tarefa
     private UUID idUser;
 
     @CreationTimestamp

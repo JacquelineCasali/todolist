@@ -27,14 +27,14 @@ public class TaskController {
     @Autowired
     private ITaskRepository taskRepository;
 
-    @PostMapping("/")
-    public ResponseEntity create(@RequestBody TaskModel taskModel, HttpServletRequest request) {
-        var idUser = request.getAttribute("idUser");
-        taskModel.setIdUser((UUID) idUser);
+    @PostMapping
+    public ResponseEntity create(@RequestBody TaskModel taskModel ,HttpServletRequest request) {
+      var idUser = request.getAttribute("idUser");
+     taskModel.setIdUser((UUID) idUser);
 
-        var currentDate = LocalDateTime.now();
-        // 10/11/2023 - Current
-        // 10/10/2023 - startAt
+       var currentDate = LocalDateTime.now();
+//        // 10/11/2023 - Current
+//        // 10/10/2023 - startAt
         if (currentDate.isAfter(taskModel.getStartAt()) || currentDate.isAfter(taskModel.getEndAt())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("A data de início / data de término deve ser maior do que a data atual");
@@ -50,7 +50,7 @@ public class TaskController {
 
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<TaskModel> list(HttpServletRequest request) {
         var idUser = request.getAttribute("idUser");
         var tasks = this.taskRepository.findByIdUser((UUID) idUser);
@@ -78,7 +78,7 @@ public class TaskController {
         Utils.copyNonNullProperties(taskModel, task);
 
         var taskUpdated = this.taskRepository.save(task);
-        return ResponseEntity.ok().body(this.taskRepository.save(taskUpdated));
+        return ResponseEntity.ok().body(taskUpdated);
 
     }
 
