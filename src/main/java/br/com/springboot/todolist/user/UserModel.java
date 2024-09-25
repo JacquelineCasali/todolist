@@ -3,6 +3,8 @@ package br.com.springboot.todolist.user;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
@@ -22,7 +24,13 @@ public class UserModel {
     private UUID id;
 
     @Column(unique = true)
+
+
+    @NotNull
+
     private String username;
+
+    @Column(unique = true)
     private String name;
     private String password;
 
