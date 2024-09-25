@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import br.com.springboot.todolist.task.ITaskRepository;
 import br.com.springboot.todolist.task.TaskModel;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +24,16 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/tasks")
+@Tag(name = "Tarefas", description = "Informação da Tarefa")
 public class TaskController {
 
     @Autowired
     private ITaskRepository taskRepository;
 
+
+    @Operation(summary = "Cadastro de tarefas", description = "Essa função é responsável por cadastrar uma tarefa")
     @PostMapping
+
     public ResponseEntity create(@RequestBody TaskModel taskModel ,HttpServletRequest request) {
       var idUser = request.getAttribute("idUser");
      taskModel.setIdUser((UUID) idUser);
